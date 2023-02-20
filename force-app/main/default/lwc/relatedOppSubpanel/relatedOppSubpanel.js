@@ -35,4 +35,18 @@ export default class RelatedOppSubpanel extends NavigationMixin(LightningElement
             },
         });
     }
+
+    createNewOpp() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__objectPage',
+            attributes: {
+                objectApiName: 'Opportunity',
+                actionName: 'new'
+            },
+            state: {
+                defaultFieldValues: "AccountId=" + this.recordId,
+                nooverride: "1"
+            }
+        });
+    }
 }
