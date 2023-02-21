@@ -127,15 +127,12 @@
                         <div class="slds-truncate" title="Close Date">{opportunity.fields.CloseDate.value}</div>
                     </td>
                     <td class="slds-cell_action-mode" role="gridcell">
-                        <button
-                            class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
-                            aria-haspopup="true" tabindex="0" title="More actions">
-                            <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
-                                aria-hidden="true">
-                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#down"></use>
-                            </svg>
-                            <span class="slds-assistive-text">More actions</span>
-                        </button>
+                        <lightning-button-menu icon-size="x-small">
+                            <lightning-menu-item label="Edit" value="edit" data-id={opportunity.fields.Id.value}
+                                onclick={editRecord}></lightning-menu-item>
+                            <lightning-menu-item label="Delete" value="delete" data-id={opportunity.fields.Id.value}
+                                onclick={deleteRecord}></lightning-menu-item>
+                        </lightning-button-menu>
                     </td>
                 </tr>
             </template>
