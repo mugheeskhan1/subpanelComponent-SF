@@ -1,10 +1,17 @@
 import { getRelatedListRecords } from 'lightning/uiRelatedListApi';
-import { api, LightningElement, wire } from 'lwc';
+import { api, LightningElement, track, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { deleteRecord } from 'lightning/uiRecordApi';
+
+const SUCCESS_TITLE = 'Success';
+const SUCCESS_VARIANT = 'success';
+const ERROR_TITLE = 'Error';
+const ERROR_VARIANT = 'error';
 
 export default class RelatedOppSubpanel extends NavigationMixin(LightningElement) {
     error;
-    opportunities;
+    @track opportunities;
     totalOpp = 0;
     @api recordId;
     @wire(getRelatedListRecords, {
@@ -58,6 +65,37 @@ export default class RelatedOppSubpanel extends NavigationMixin(LightningElement
             attributes: {
                 url: '/lightning/n/viewAllOpp?c__recordId=' + this.recordId
             }
+        });
+    }
+
+    editRecord(event) {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: event.currentTarget.dataset.id,
+                actionName: 'edit'
+            }
+        });
+    }
+
+    deleteRecord(event) {
+        const recordId = event.currentTarget.dataset.id;
+        deleteRecord(recordId).then(() => {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: SUCCESS_TITLE,
+                    message: 'Record with id ' + recordId + ' deleted',
+                    variant: SUCCESS_VARIANT
+                })
+            );
+        }).catch(error => {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: ERROR_TITLE,
+                    message: error.body.message,
+                    variant: ERROR_VARIANT
+                })
+            );
         });
     }
 }
