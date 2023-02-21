@@ -49,4 +49,15 @@ export default class RelatedOppSubpanel extends NavigationMixin(LightningElement
             }
         });
     }
+
+    // As related list view does not allow pre applied permanent filter,
+    // calling our custom view for showing data
+    viewAllClosedWonOpp() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/lightning/n/viewAllOpp?c__recordId=' + this.recordId
+            }
+        });
+    }
 }
