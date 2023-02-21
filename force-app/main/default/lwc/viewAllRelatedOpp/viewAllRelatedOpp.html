@@ -113,18 +113,28 @@
                     <th class="slds-cell_action-mode" scope="row">
                         <div class="slds-truncate" title="Opportunity Name">
                             <a onclick={viewRecord} data-id={opportunity.fields.Id.value}>
-                                {opportunity.fields.Name.value}
+                                <lightning-formatted-text value={opportunity.fields.Name.value}>
+                                </lightning-formatted-text>
                             </a>
                         </div>
                     </th>
                     <td class="slds-cell_action-mode" role="gridcell">
-                        <div class="slds-truncate" title="Stage"> {opportunity.fields.StageName.value}</div>
+                        <div class="slds-truncate" title="Stage">
+                            <lightning-formatted-text value={opportunity.fields.StageName.value}>
+                            </lightning-formatted-text>
+                        </div>
                     </td>
                     <td class="slds-cell_action-mode" role="gridcell">
-                        <div class="slds-truncate" title="Amount">{opportunity.fields.Amount.value}</div>
+                        <div class="slds-truncate" title="Amount">
+                            <lightning-formatted-number value={opportunity.fields.Amount.value} format-style="currency"
+                                currency-code="USD"></lightning-formatted-number>
+                        </div>
                     </td>
                     <td class="slds-cell_action-mode" role="gridcell">
-                        <div class="slds-truncate" title="Close Date">{opportunity.fields.CloseDate.value}</div>
+                        <div class="slds-truncate" title="Close Date">
+                            <lightning-formatted-date-time value={opportunity.fields.CloseDate.value}>
+                            </lightning-formatted-date-time>
+                        </div>
                     </td>
                     <td class="slds-cell_action-mode" role="gridcell">
                         <lightning-button-menu icon-size="x-small">

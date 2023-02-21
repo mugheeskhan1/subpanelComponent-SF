@@ -33,7 +33,9 @@
                                 <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
                                     <h3 class="slds-truncate" title="Opportunity Name">
                                         <a onclick={viewRecord} data-id={opportunity.fields.Id.value}>
-                                            {opportunity.fields.Name.value}</a>
+                                            <lightning-formatted-text value={opportunity.fields.Name.value}>
+                                            </lightning-formatted-text>
+                                        </a>
                                     </h3>
                                     <div class="slds-shrink-none">
                                         <lightning-button-menu icon-size="x-small">
@@ -52,17 +54,24 @@
                                             title="Stage label">
                                             Stage</dt>
                                         <dd class="slds-item_detail slds-truncate" title="Amount">
-                                            {opportunity.fields.StageName.value}</dd>
+                                            <lightning-formatted-text value={opportunity.fields.StageName.value}>
+                                            </lightning-formatted-text>
+                                        </dd>
                                         <dt class="slds-item_label slds-text-color_weak slds-truncate"
                                             title="Label for Amount">
                                             Amount</dt>
                                         <dd class="slds-item_detail slds-truncate" title="Amount">
-                                            {opportunity.fields.Amount.value}</dd>
+                                            <lightning-formatted-number value={opportunity.fields.Amount.value}
+                                                format-style="currency"
+                                                currency-code="USD"></lightning-formatted-number>
+                                        </dd>
                                         <dt class="slds-item_label slds-text-color_weak slds-truncate"
                                             title="Label for Close Date">
                                             Close Date</dt>
                                         <dd class="slds-item_detail slds-truncate" title="Close Date">
-                                            {opportunity.fields.CloseDate.value}</dd>
+                                            <lightning-formatted-date-time
+                                                value={opportunity.fields.CloseDate.value}></lightning-formatted-date-time>
+                                        </dd>
                                     </dl>
                                 </div>
                             </div>
