@@ -1,12 +1,19 @@
+import { LightningElement, track, wire } from 'lwc';
+import { CurrentPageReference } from 'lightning/navigation';
 import { getRelatedListRecords } from 'lightning/uiRelatedListApi';
-import { api, LightningElement, wire } from 'lwc';
-import { NavigationMixin } from 'lightning/navigation';
 
-export default class RelatedOppSubpanel extends NavigationMixin(LightningElement) {
+export default class ViewAllRelatedOpp extends LightningElement {
+
     error;
     opportunities;
-    totalOpp = 0;
-    @api recordId;
+    counter = 1;
+    @track currentPageReference;
+
+    @wire(CurrentPageReference)
+    setCurrentPageReference(currentPageReference) {
+        this.currentPageReference = currentPageReference;
+    }
+
     @wire(getRelatedListRecords, {
         parentRecordId: '$recordId',
         relatedListId: 'Opportunities',
@@ -16,11 +23,18 @@ export default class RelatedOppSubpanel extends NavigationMixin(LightningElement
         if (data) {
             this.opportunities = data.records;
             this.error = undefined;
-            this.totalOpp = Object.keys(this.opportunities).length;
         } else if (error) {
             this.error = error;
             this.opportunities = undefined;
         }
+    }
+
+    get recordId() {
+        return this.currentPageReference?.state?.c__recordId;
+    }
+
+    get index() {
+        return this.counter++;
     }
 
     viewRecord(event) {
@@ -33,31 +47,6 @@ export default class RelatedOppSubpanel extends NavigationMixin(LightningElement
                 "objectApiName": "Opportunity",
                 "actionName": "view"
             },
-        });
-    }
-
-    createNewOpp() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__objectPage',
-            attributes: {
-                objectApiName: 'Opportunity',
-                actionName: 'new'
-            },
-            state: {
-                defaultFieldValues: "AccountId=" + this.recordId,
-                nooverride: "1"
-            }
-        });
-    }
-
-    // As related list view does not allow pre applied permanent filter,
-    // calling our custom view for showing data
-    viewAllClosedWonOpp() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__webPage',
-            attributes: {
-                url: '/lightning/n/viewAllOpp?c__recordId=' + this.recordId
-            }
         });
     }
 }

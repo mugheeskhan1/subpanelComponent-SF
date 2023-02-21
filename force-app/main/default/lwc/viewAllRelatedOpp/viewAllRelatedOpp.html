@@ -1,0 +1,144 @@
+<template>
+    <table aria-multiselectable="true"
+        class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid"
+        aria-label="Example advanced table of Opportunities in actionable mode">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="slds-text-align_right slds-cell_action-mode" scope="col" style="width:3.25rem">
+                    <span id="column-group-header" class="slds-assistive-text">No:</span>
+                </th>
+                <th aria-label="Name" aria-sort="none" class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                    scope="col">
+                    <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                        <span class="slds-assistive-text">Sort by: </span>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Opportunity Name">Name</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon "
+                                    aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Name column width"
+                            class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-561" max="1000"
+                            min="20" tabindex="0" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th aria-label="Account Name" aria-sort="none"
+                    class="slds-is-resizable slds-is-sortable slds-cell_action-mode" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                        <span class="slds-assistive-text">Sort by: </span>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Opportunity Stage">Stage</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon "
+                                    aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Account Name column width"
+                            class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-562" max="1000"
+                            min="20" tabindex="0" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th aria-label="Close Date" aria-sort="none"
+                    class="slds-is-resizable slds-is-sortable slds-cell_action-mode" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                        <span class="slds-assistive-text">Sort by: </span>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Opportunity Amount">Amount</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon "
+                                    aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Close Date column width"
+                            class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-563" max="1000"
+                            min="20" tabindex="0" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th aria-label="Stage" aria-sort="none" class="slds-is-resizable slds-is-sortable slds-cell_action-mode"
+                    scope="col">
+                    <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                        <span class="slds-assistive-text">Sort by: </span>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Close Date">Close Date</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon "
+                                    aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Stage column width"
+                            class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-564" max="1000"
+                            min="20" tabindex="0" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th class="slds-cell_action-mode" scope="col" style="width:3.25rem">
+                    <div class="slds-truncate slds-assistive-text" title="Actions">Actions</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={opportunities} for:item="opportunity">
+                <tr key={opportunity.fields.Id.value} aria-selected="false" class="slds-hint-parent">
+                    <td class="slds-text-align_right slds-cell_action-mode" role="gridcell">
+                        {index}
+                    </td>
+                    <th class="slds-cell_action-mode" scope="row">
+                        <div class="slds-truncate" title="Opportunity Name">
+                            <a onclick={viewRecord} data-id={opportunity.fields.Id.value}>
+                                {opportunity.fields.Name.value}
+                            </a>
+                        </div>
+                    </th>
+                    <td class="slds-cell_action-mode" role="gridcell">
+                        <div class="slds-truncate" title="Stage"> {opportunity.fields.StageName.value}</div>
+                    </td>
+                    <td class="slds-cell_action-mode" role="gridcell">
+                        <div class="slds-truncate" title="Amount">{opportunity.fields.Amount.value}</div>
+                    </td>
+                    <td class="slds-cell_action-mode" role="gridcell">
+                        <div class="slds-truncate" title="Close Date">{opportunity.fields.CloseDate.value}</div>
+                    </td>
+                    <td class="slds-cell_action-mode" role="gridcell">
+                        <button
+                            class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-x-small"
+                            aria-haspopup="true" tabindex="0" title="More actions">
+                            <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
+                                aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#down"></use>
+                            </svg>
+                            <span class="slds-assistive-text">More actions</span>
+                        </button>
+                    </td>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>
