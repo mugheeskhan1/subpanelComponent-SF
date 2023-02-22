@@ -22,64 +22,70 @@
                 </div>
             </header>
         </div>
-        <div class="slds-card__body slds-card__body_inner slds-border_right slds-border_left ">
-            <ul class="slds-grid slds-wrap slds-grid_pull-padded slds-var-p-left_medium slds-var-p-right_medium ">
-                <template for:each={opportunities} for:item="opportunity">
-                    <li key={opportunity.fields.Id.value}
-                        class="slds-var-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-3">
-                        <article class="slds-tile slds-media slds-card__tile slds-hint-parent">
+        <template if:true={opportunities}>
+            <div class="slds-card__body slds-card__body_inner slds-border_right slds-border_left ">
+                <ul class="slds-grid slds-wrap slds-grid_pull-padded slds-var-p-left_medium slds-var-p-right_medium ">
+                    <template for:each={opportunities} for:item="opportunity">
+                        <li key={opportunity.fields.Id.value}
+                            class="slds-var-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-3">
+                            <article class="slds-tile slds-media slds-card__tile slds-hint-parent">
 
-                            <div class="slds-media__body">
-                                <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
-                                    <h3 class="slds-truncate" title="Opportunity Name">
-                                        <a onclick={viewRecord} data-id={opportunity.fields.Id.value}>
-                                            <lightning-formatted-text value={opportunity.fields.Name.value}>
-                                            </lightning-formatted-text>
-                                        </a>
-                                    </h3>
-                                    <div class="slds-shrink-none">
-                                        <lightning-button-menu icon-size="x-small">
-                                            <lightning-menu-item label="Edit" value="edit"
-                                                data-id={opportunity.fields.Id.value}
-                                                onclick={editRecord}></lightning-menu-item>
-                                            <lightning-menu-item label="Delete" value="delete"
-                                                data-id={opportunity.fields.Id.value}
-                                                onclick={deleteRecord}></lightning-menu-item>
-                                        </lightning-button-menu>
+                                <div class="slds-media__body">
+                                    <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                        <h3 class="slds-truncate" title="Opportunity Name">
+                                            <a onclick={viewRecord} data-id={opportunity.fields.Id.value}>
+                                                <lightning-formatted-text value={opportunity.fields.Name.value}>
+                                                </lightning-formatted-text>
+                                            </a>
+                                        </h3>
+                                        <div class="slds-shrink-none">
+                                            <lightning-button-menu icon-size="x-small">
+                                                <lightning-menu-item label="Edit" value="edit"
+                                                    data-id={opportunity.fields.Id.value}
+                                                    onclick={editRecord}></lightning-menu-item>
+                                                <lightning-menu-item label="Delete" value="delete"
+                                                    data-id={opportunity.fields.Id.value}
+                                                    onclick={deleteRecord}></lightning-menu-item>
+                                            </lightning-button-menu>
+                                        </div>
+                                    </div>
+                                    <div class="slds-tile__detail">
+                                        <dl class="slds-list_horizontal slds-wrap">
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate"
+                                                title="Stage label">
+                                                Stage</dt>
+                                            <dd class="slds-item_detail slds-truncate" title="Amount">
+                                                <lightning-formatted-text value={opportunity.fields.StageName.value}>
+                                                </lightning-formatted-text>
+                                            </dd>
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate"
+                                                title="Label for Amount">
+                                                Amount</dt>
+                                            <dd class="slds-item_detail slds-truncate" title="Amount">
+                                                <lightning-formatted-number value={opportunity.fields.Amount.value}
+                                                    format-style="currency"
+                                                    currency-code="USD"></lightning-formatted-number>
+                                            </dd>
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate"
+                                                title="Label for Close Date">
+                                                Close Date</dt>
+                                            <dd class="slds-item_detail slds-truncate" title="Close Date">
+                                                <lightning-formatted-date-time
+                                                    value={opportunity.fields.CloseDate.value}></lightning-formatted-date-time>
+                                            </dd>
+                                        </dl>
                                     </div>
                                 </div>
-                                <div class="slds-tile__detail">
-                                    <dl class="slds-list_horizontal slds-wrap">
-                                        <dt class="slds-item_label slds-text-color_weak slds-truncate"
-                                            title="Stage label">
-                                            Stage</dt>
-                                        <dd class="slds-item_detail slds-truncate" title="Amount">
-                                            <lightning-formatted-text value={opportunity.fields.StageName.value}>
-                                            </lightning-formatted-text>
-                                        </dd>
-                                        <dt class="slds-item_label slds-text-color_weak slds-truncate"
-                                            title="Label for Amount">
-                                            Amount</dt>
-                                        <dd class="slds-item_detail slds-truncate" title="Amount">
-                                            <lightning-formatted-number value={opportunity.fields.Amount.value}
-                                                format-style="currency"
-                                                currency-code="USD"></lightning-formatted-number>
-                                        </dd>
-                                        <dt class="slds-item_label slds-text-color_weak slds-truncate"
-                                            title="Label for Close Date">
-                                            Close Date</dt>
-                                        <dd class="slds-item_detail slds-truncate" title="Close Date">
-                                            <lightning-formatted-date-time
-                                                value={opportunity.fields.CloseDate.value}></lightning-formatted-date-time>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </article>
-                    </li>
-                </template>
-            </ul>
-        </div>
+                            </article>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </template>
+        <template if:true={error}>
+            <p> Error Occured!! Error: </p>
+            <p>{error}</p>
+        </template>
         <footer class="slds-card__footer slds-box">
             <a class="slds-card__footer-action" onclick={viewAllClosedWonOpp}>View All
                 <span class="slds-assistive-text">Closed Won Opportunities</span>

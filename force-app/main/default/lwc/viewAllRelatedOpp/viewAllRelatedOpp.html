@@ -105,46 +105,52 @@
             </tr>
         </thead>
         <tbody>
-            <template for:each={opportunities} for:item="opportunity">
-                <tr key={opportunity.fields.Id.value} aria-selected="false" class="slds-hint-parent">
-                    <td class="slds-text-align_right slds-cell_action-mode" role="gridcell">
-                        {index}
-                    </td>
-                    <th class="slds-cell_action-mode" scope="row">
-                        <div class="slds-truncate" title="Opportunity Name">
-                            <a onclick={viewRecord} data-id={opportunity.fields.Id.value}>
-                                <lightning-formatted-text value={opportunity.fields.Name.value}>
+            <template if:true={opportunities}>
+                <template for:each={opportunities} for:item="opportunity">
+                    <tr key={opportunity.fields.Id.value} aria-selected="false" class="slds-hint-parent">
+                        <td class="slds-text-align_right slds-cell_action-mode" role="gridcell">
+                            {index}
+                        </td>
+                        <th class="slds-cell_action-mode" scope="row">
+                            <div class="slds-truncate" title="Opportunity Name">
+                                <a onclick={viewRecord} data-id={opportunity.fields.Id.value}>
+                                    <lightning-formatted-text value={opportunity.fields.Name.value}>
+                                    </lightning-formatted-text>
+                                </a>
+                            </div>
+                        </th>
+                        <td class="slds-cell_action-mode" role="gridcell">
+                            <div class="slds-truncate" title="Stage">
+                                <lightning-formatted-text value={opportunity.fields.StageName.value}>
                                 </lightning-formatted-text>
-                            </a>
-                        </div>
-                    </th>
-                    <td class="slds-cell_action-mode" role="gridcell">
-                        <div class="slds-truncate" title="Stage">
-                            <lightning-formatted-text value={opportunity.fields.StageName.value}>
-                            </lightning-formatted-text>
-                        </div>
-                    </td>
-                    <td class="slds-cell_action-mode" role="gridcell">
-                        <div class="slds-truncate" title="Amount">
-                            <lightning-formatted-number value={opportunity.fields.Amount.value} format-style="currency"
-                                currency-code="USD"></lightning-formatted-number>
-                        </div>
-                    </td>
-                    <td class="slds-cell_action-mode" role="gridcell">
-                        <div class="slds-truncate" title="Close Date">
-                            <lightning-formatted-date-time value={opportunity.fields.CloseDate.value}>
-                            </lightning-formatted-date-time>
-                        </div>
-                    </td>
-                    <td class="slds-cell_action-mode" role="gridcell">
-                        <lightning-button-menu icon-size="x-small">
-                            <lightning-menu-item label="Edit" value="edit" data-id={opportunity.fields.Id.value}
-                                onclick={editRecord}></lightning-menu-item>
-                            <lightning-menu-item label="Delete" value="delete" data-id={opportunity.fields.Id.value}
-                                onclick={deleteRecord}></lightning-menu-item>
-                        </lightning-button-menu>
-                    </td>
-                </tr>
+                            </div>
+                        </td>
+                        <td class="slds-cell_action-mode" role="gridcell">
+                            <div class="slds-truncate" title="Amount">
+                                <lightning-formatted-number value={opportunity.fields.Amount.value}
+                                    format-style="currency" currency-code="USD"></lightning-formatted-number>
+                            </div>
+                        </td>
+                        <td class="slds-cell_action-mode" role="gridcell">
+                            <div class="slds-truncate" title="Close Date">
+                                <lightning-formatted-date-time value={opportunity.fields.CloseDate.value}>
+                                </lightning-formatted-date-time>
+                            </div>
+                        </td>
+                        <td class="slds-cell_action-mode" role="gridcell">
+                            <lightning-button-menu icon-size="x-small">
+                                <lightning-menu-item label="Edit" value="edit" data-id={opportunity.fields.Id.value}
+                                    onclick={editRecord}></lightning-menu-item>
+                                <lightning-menu-item label="Delete" value="delete" data-id={opportunity.fields.Id.value}
+                                    onclick={deleteRecord}></lightning-menu-item>
+                            </lightning-button-menu>
+                        </td>
+                    </tr>
+                </template>
+            </template>
+            <template if:true={error}>
+                <p> Error Occured!! Error: </p>
+                <p>{error}</p>
             </template>
         </tbody>
     </table>
