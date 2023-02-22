@@ -3,6 +3,7 @@ import { api, LightningElement, track, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { deleteRecord } from 'lightning/uiRecordApi';
+import { encodeDefaultFieldValues } from 'lightning/pageReferenceUtils';
 
 const SUCCESS_TITLE = 'Success';
 const SUCCESS_VARIANT = 'success';
@@ -44,6 +45,10 @@ export default class RelatedOppSubpanel extends NavigationMixin(LightningElement
     }
 
     createNewOpp() {
+        const defaultValues = encodeDefaultFieldValues({
+            AccountId: this.recordId,
+            StageName: 'Closed Won',
+        });
         this[NavigationMixin.Navigate]({
             type: 'standard__objectPage',
             attributes: {
@@ -51,8 +56,7 @@ export default class RelatedOppSubpanel extends NavigationMixin(LightningElement
                 actionName: 'new'
             },
             state: {
-                defaultFieldValues: "AccountId=" + this.recordId,
-                nooverride: "1"
+                defaultFieldValues: defaultValues,
             }
         });
     }
